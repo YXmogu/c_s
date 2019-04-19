@@ -1,0 +1,24 @@
+#include <stdio.h>
+#include <unistd.h>
+#include <arpa/inet.h>
+
+#define IP "127.0.0.1"
+#define PORT 8888
+
+int main()
+{
+  int fd = socket(AF_INET, SOCK_STREAM, 0);
+    printf("%d\n", fd);
+    
+  struct sockaddr_in sv;
+  sv.sin_family = AF_INET;
+  sv.sin_port = htons(PORT);
+  sv.sin_addr.s_addr = inet_addr(IP);
+  
+  int cd = connect(fd, (struct sockaddr*)&fd, sizeof(fd));
+    printf("%d", cd);
+  
+  close(fd);
+  
+  return 0;
+}
